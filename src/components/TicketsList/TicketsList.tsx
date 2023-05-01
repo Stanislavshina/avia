@@ -4,9 +4,11 @@ import { useAppDispatch, useAppSelector } from '../../store/handlerHooks';
 import { fetchTickets, showMore } from '../../store/slices/tickets';
 import TicketItem from '../Ticket/Ticket';
 import cl from './TicketsList.module.scss';
+import { Ticket } from '../../types/ticket';
+import { Checkbox } from '../../types/checkbox';
 
 const TicketsList: React.FC = () => {
-  const [filteredTickets, setFilteredTickets] = useState([]);
+  const [filteredTickets, setFilteredTickets] = useState<Ticket[]>([]);
   const dispatch = useAppDispatch();
   const tickets = useAppSelector((state) => state.tickets.tickets);
   const visibleTickets = useAppSelector((state) => state.tickets.visibleTickets);
@@ -26,15 +28,15 @@ const TicketsList: React.FC = () => {
   }, [dispatch, stop, errorCount]);
 
   useEffect(() => {
-    const cheks = checkbox.filter((el) => el.isChecked);
+    const cheks = checkbox.filter((checkbox: Checkbox) => checkbox.isChecked);
     let filtered = [];
     if (cheks.length === 4) {
       filtered = tickets;
     } else {
-      filtered = tickets.filter((el) => {
-        const ticketsFrom = el.segments[0].stops.length;
-        const ticketsTo = el.segments[1].stops.length;
-        return cheks.some((el) => el.id === ticketsFrom || el.id === ticketsTo);
+      filtered = tickets.filter((ticket: Ticket) => {
+        const ticketsFrom = ticket.segments[0].stops.length;
+        const ticketsTo = ticket.segments[1].stops.length;
+        return cheks.some((checkbox: Checkbox) => checkbox.id === ticketsFrom || checkbox.id === ticketsTo);
       });
     }
     setFilteredTickets(filtered);
@@ -44,20 +46,14 @@ const TicketsList: React.FC = () => {
 
   return (
     <div className={cl.tickets}>
-      {visibleT.length > 0 ? (
-        <ul>
-          {visibleT.map((ticket) => (
-            <TicketItem key={nanoid()} ticket={ticket} />
-          ))}
-        </ul>
-      ) : (
-        <Alert message="No tickets found" type="warning" style={{ borderColor: '#1890ff' }} />
-      )}
-      {filteredTickets.length > visibleTickets && (
-        <button className={cl.button__showmore} onClick={handler}>
-          Показать еще 5 билетов
-        </button>
-      )}
+      <ul>
+        {visibleT.map((ticket) => (
+          <TicketItem key={nanoid()} ticket={ticket} />
+        ))}
+      </ul>
+      <button className={cl.button__showmore} onClick={handler}>
+        Показать еще 5 билетов
+      </button>
     </div>
   );
 };
