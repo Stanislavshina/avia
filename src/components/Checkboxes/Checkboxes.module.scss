@@ -1,0 +1,50 @@
+.aside-bar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 20px;
+  background: #ffffff;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 20px;
+  font-weight: 600;
+  line-height: 12px;
+  letter-spacing: 0.5px;
+  color: #4a4a4a;
+  font-weight: 400;
+  max-width: fit-content;
+  max-height: 250px;
+}
+
+h3 {
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+span {
+  font-size: 13px;
+}
+input {
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+  appearance: none;
+  border: 1px solid #9abbce;
+  border-radius: 2px;
+
+  cursor: pointer;
+}
+
+input:checked {
+  background-image: url('./Shape.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+}

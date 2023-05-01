@@ -1,0 +1,25 @@
+
+.tabs{
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  width: 100%;
+  &__button {
+    background-color: #fff;
+    color: #4a4a4a;
+    border: 1px solid #DFE5EC;
+    padding: 15px;
+    width: 168px;  
+    cursor: pointer;
+    &:first-child {
+      border-radius: 5px 0px 0px 5px;
+    }
+    &:last-child {
+      border-radius: 0px 5px 5px 0px;
+    }
+    &--active{
+      background-color: #2196F3;
+      color: #fff;
+    }
+  }
+}
